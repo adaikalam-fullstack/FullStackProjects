@@ -1,0 +1,75 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="page-container">
+
+  <div class="heading-row">
+    <h2>Employee Management</h2>
+    <button pButton label="Add Employee" icon="pi pi-plus" class="p-button-success" 
+            (click)="openNew()"></button>
+  </div>
+
+  <p-table [value]="employees" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20]"
+           responsiveLayout="stack" class="emp-table">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th class="actions-col">Actions</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-emp>
+        <tr>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.department }}</td>
+          <td class="actions-col">
+            <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-info p-button-sm"
+                    (click)="editEmployee(emp)"></button>
+            <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-sm ml-2"
+                    (click)="deleteEmployee(emp)"></button>
+          </td>
+        </tr>
+      </ng-template>
+
+  </p-table>
+
+</div>
+
+<!-- Dialog -->
+<p-dialog 
+  header="Employee Details" 
+  [(visible)]="employeeDialog" 
+  [modal]="true" 
+  [style]="{ width: '400px' }"
+  [breakpoints]="{'960px':'75vw','640px':'90vw'}"
+  class="dialog-box">
+
+  <div class="p-fluid">
+
+    <div class="field">
+      <label>Name</label>
+      <input pInputText [(ngModel)]="formData.name">
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <input pInputText [(ngModel)]="formData.email">
+    </div>
+
+    <div class="field">
+      <label>Department</label>
+      <input pInputText [(ngModel)]="formData.department">
+    </div>
+
+  </div>
+
+  <p-footer class="dialog-footer">
+    <button pButton label="Cancel" class="p-button-text" (click)="employeeDialog = false"></button>
+    <button pButton label="Save" class="p-button-primary" (click)="saveEmployee()"></button>
+  </p-footer>
+
+</p-dialog>
