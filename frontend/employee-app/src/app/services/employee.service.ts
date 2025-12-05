@@ -20,6 +20,7 @@ export class EmployeeService {
   }
 
   createEmployee(employee: any): Observable<any> {
+    console.log("save service:",employee);
     return this.http.post(this.apiUrl, employee);
   }
 

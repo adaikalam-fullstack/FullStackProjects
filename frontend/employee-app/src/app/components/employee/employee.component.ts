@@ -66,7 +66,7 @@ export class EmployeeComponent implements OnInit {
     const action = this.formData.id
       ? this.employeeService.updateEmployee(this.formData.id, this.formData)
       : this.employeeService.createEmployee(this.formData);
-
+    console.log("this.formData:",this.formData);
     action.subscribe(() => {
       this.msg.add({
         severity: 'success',
